@@ -1,12 +1,15 @@
 # Specification of kjorand's Network RPN Calc Protocol [NRCP]
 
-Version 0.0.1 
+Version 0.0.2 
 
 ## Goal ( *Protocol objectives: what does the protocol do?* )
 
 The NRCP intends to describe a protocol used for calculations with a client, where the user enters the numbers and the operations and a server, which executes them. This document specifies the format which is used to comunicate with the server (in both directions) and the frame in which it can be used.
 
 ## Protocol's Overall behavior
+
+The NRCP operates as a RPN calculator. Unfamiliar users should look up how to interract with a RPN calculator before using such a calculator.
+
 ### Transport protocol ( *What transport protocol do we use?* )
 
 The NRCP relies on TCP/IP for communication between the client and server.
@@ -98,12 +101,14 @@ Client -[#blue]> Server : end
 ```
 
 ## Version history
-| Version | Changes                 |
-| ------- | ----------------------- |
-| 0.0.0   | Initial protocol design |
-| 0.0.1   | Initial review          |
+| Version | Changes                                  |
+| ------- | ---------------------------------------- |
+| 0.0.0   | Initial protocol design                  |
+| 0.0.1   | Initial review                           |
+| 0.0.2   | Review adding precisions (RPN calulator) |
 
 ## Version compatibility
 | Version on serve | Compatible from (acceptable version from client) |
-| ---------------- | ------------------------------------------------- |
+| ---------------- | ------------------------------------------------ |
 | 0.0.1            | 0.0.0                                            |
+| 0.0.2            | 0.0.0                                            |
