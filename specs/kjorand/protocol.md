@@ -1,6 +1,6 @@
 # Specification of kjorand's Network RPN Calc Protocol [NRCP]
 
-Version 0.0.2 
+Version 0.0.3 
 
 ## Goal ( *Protocol objectives: what does the protocol do?* )
 
@@ -96,8 +96,27 @@ Client -[#blue]> Server : commands : +
 Server -[#red]> Client : Partial result : 6
 Client -[#blue]> Server : commands : /
 Server -[#red]> Client : result : 10
+Client -[#blue]> Server : value : 0
+Client -[#blue]> Server : commands : /
+Server -[#red]> Client : error : divideByZero
 Client -[#blue]> Server : end
 @enduml
+```
+Examples of actual exchanged message (corresponding to the above example):
+```
+Server -> Client : {Supported Version}0.0.0{-}
+Client -> Server : {values}[5],[3],[9]{-}
+Client -> Server : {operations}[+],[*]{-}
+Server -> Client : {result}60{-}
+Client -> Server : {values}[2],[4]{-}
+Client -> Server : {commands}+{-}
+Server -> Client : {Partial result}6{-}
+Client -> Server : {commands}/{-}
+Server -> Client : {result}10{-}
+Client -> Server : {value}0{-}
+Client -> Server : {commands}/{-}
+Server -> Client : {error}divideByZero{-}
+Client -> Server : {end}{-}
 ```
 
 ## Version history
@@ -106,9 +125,11 @@ Client -[#blue]> Server : end
 | 0.0.0   | Initial protocol design                  |
 | 0.0.1   | Initial review                           |
 | 0.0.2   | Review adding precisions (RPN calulator) |
+| 0.0.3   | More precise syntaxe example             |
 
 ## Version compatibility
-| Version on serve | Compatible from (acceptable version from client) |
-| ---------------- | ------------------------------------------------ |
-| 0.0.1            | 0.0.0                                            |
-| 0.0.2            | 0.0.0                                            |
+| Version on server | Compatible from (acceptable version from client) |
+| ----------------- | ------------------------------------------------ |
+| 0.0.1             | 0.0.0                                            |
+| 0.0.2             | 0.0.0                                            |
+| 0.0.3             | 0.0.0                                            |
