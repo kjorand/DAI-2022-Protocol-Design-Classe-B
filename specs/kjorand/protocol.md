@@ -1,6 +1,6 @@
 # Specification of kjorand's Network RPN Calc Protocol [NRCP]
 
-Version 1.0.0
+Version 1.0.1
 
 ## Goal ( *Protocol objectives: what does the protocol do?* )
 
@@ -93,6 +93,7 @@ Message types are :
 * `ERROR` from server to client , automatically followed by one of the following errors. First value is the error code, second is the name (as seen below), optionnal following values are description/adtionnal informations and are implementation dependant
 * `ACTIVITY_PROBE` from server to client, might be sent before dropping the connection
 * `ACTIVE` from client to server, as a response to the above. Might cause a `wrongSyntax` error if not sent in response to an `ACTIVITY_PROBE`
+* `QUIT` from either side, indicates the connection will be closed
 #### Error handling
 The server can reply with following errors:
 * `timeout` [010] in case of server timeout
@@ -124,6 +125,7 @@ Client -[#blue]> Server : NUMERIC_OPERATION\n/
 Server -[#red]> Client : RESULT\n10
 Client -[#blue]> Server : NUMERIC_OPERATION\n0\n/
 Server -[#red]> Client : ERROR\n000\ndivideByZero
+Client -[#blue]> Server : QUIT
 @enduml
 ```
 Textual example of actual exchanged message (corresponding to the above example):
@@ -175,6 +177,10 @@ ERROR
 000
 divideByZero
 
+C->S : 
+QUIT
+
+
 ```
 
 ## Version history
@@ -186,6 +192,7 @@ divideByZero
 | 0.0.3           | More precise syntaxe example                                                        |
 | 0.0.4           | More precise definition of (partial-)result + intro of reset (Thkx Elliot's review) |
 | 1.0.0 :warning: | :red_circle: :new: SYNTAX :red_circle: + precisions added                           |
+| 1.0.1           | Added quitting command                                                              |
 
 ## Version compatibility
 | Version on server | Compatible from (acceptable version from client) |
@@ -195,3 +202,4 @@ divideByZero
 | 0.0.3             | 0.0.0                                            |
 | 0.0.4             | 0.0.0 :x:                                        |
 | 1.0.0             | 1.0.0 :new:                                      |
+| 1.0.1             | 1.0.0                                            |
