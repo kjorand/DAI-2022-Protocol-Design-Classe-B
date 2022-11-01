@@ -1,6 +1,6 @@
 # Specification of kjorand's Network RPN Calc Protocol [NRCP]
 
-Version 1.0.1
+Version 1.0.2
 
 ## Goal ( *Protocol objectives: what does the protocol do?* )
 
@@ -81,13 +81,13 @@ Current supported opeations are :
 * `-` substraction
 * `*` multiplication
 * `/` division
-* `%` modulo (only defined for positive integers)
-* `^` power (only defined for positive integer exponents)
+* `%` modulo
+* `^` power
 * `rst` reset (completely clears the stack)
 #### Message types
 Message types are : 
 * `VERSION` from server to client, is sent when a new client connects to the server
-* `NUMERIC_OPERATION` from client to server, values can be either numbers or operations
+* `NUMERIC_OPERATION` (alias `OP`) from client to server, values can be either numbers or operations
 * `PARTIAL_RESULT` from server to client, is sent when it encounters an operation followed immediately by a blank line
 * `RESULT` from server to client, is sent when it encounters an operation followed immediately by a blank line and there is only one value on the stack
 * `ERROR` from server to client , automatically followed by one of the following errors. First value is the error code, second is the name (as seen below), optionnal following values are description/adtionnal informations and are implementation dependant
@@ -193,6 +193,7 @@ QUIT
 | 0.0.4           | More precise definition of (partial-)result + intro of reset (Thkx Elliot's review) |
 | 1.0.0 :warning: | :red_circle: :new: SYNTAX :red_circle: + precisions added                           |
 | 1.0.1           | Added quitting command                                                              |
+| 1.0.2           | Removed restriction + added alias                                                   |
 
 ## Version compatibility
 | Version on server | Compatible from (acceptable version from client) |
@@ -203,3 +204,4 @@ QUIT
 | 0.0.4             | 0.0.0 :x:                                        |
 | 1.0.0             | 1.0.0 :new:                                      |
 | 1.0.1             | 1.0.0                                            |
+| 1.0.2             | 1.0.0                                            |
